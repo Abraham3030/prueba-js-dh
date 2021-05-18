@@ -6,42 +6,33 @@
            * pendiente
          )
 */
+const fs = require('fs');
+const cadena = fs.readFileSync('./tareas.json', 'utf-8');
 
 exports.leerTareas = function () {
     /*
         En esta función debes leer y retornar las tareas registradas.
     */
-     
-    /*const formatoTareas = [
-        {"titulo":"tarea 1","status":"pendiente"},
-        {"titulo":"tarea 2","status":"terminada"}
-    ];*/  
-    const listado = fs.readFileSync('./tareas.json', 'utf-8');
-    console.log(listado);
-    return listado;
-    
-    //return formatoTareas;
+    //const cadena = fs.readFileSync('./tareas.json', 'utf-8');
+    let arr = [];
+    arr = JSON.parse(cadena);
+    return JSON.parse(cadena);
 }
 
 exports.agregarTarea = function (tarea) {
     /*
         Registra y guarda una nueva tarea.
     */
-    /*let listado = fs.readFileSync('tareas.json', 'utf-8');
-    let listadoArr = [];
-    console.log(JSON.parse(listado));
-    listadoArr = JSON.parse(listado);
-    typeof listadoArr;
-    console.log(typeof listadoArr);
-    listadoArr.push(tarea);
-    const tareasMod = JSON.stringify(listadoArr);
-    fs.writeFileSync('./tareas.json', tareasMod, (err) => {
+    let cadena = fs.readFileSync('./tareas.json', 'utf-8');
+    let cadenaArr = [];
+    cadenaArr = JSON.parse(cadena);
+    cadenaArr.push(tarea);
+    const listaTareas = JSON.stringify(cadenaArr);
+    fs.writeFileSync('./tareas.json', listaTareas, (err) => {
         if(err){
             throw err;
-        }console.log('Guardado');
-    })*/
-    return tarea;
-
+        } console.log('Se guardo');
+    })
 }
 
 exports.filtrarTareasPorEstado = function (estado) {
@@ -49,6 +40,10 @@ exports.filtrarTareasPorEstado = function (estado) {
         En esta función debes de leer las tareas y retornar las que tengan el estado que se
         manda en el parametro.
     */
-   //return estado;
-   //return filtrarTareasPorEstado();
+    let cadenaArr = [];
+    cadenaArr = JSON.parse(cadena);
+    let otroCadena = cadenaArr.filter((obj) => {
+        return obj.status === estado;
+    });
+    return otroCadena;
 }
